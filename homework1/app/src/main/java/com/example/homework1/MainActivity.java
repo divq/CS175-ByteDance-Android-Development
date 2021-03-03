@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         searchAdapter.notifyItems(allEntries);
 
         EditText editText = findViewById(R.id.edittext);
-        editText.setBackgroundColor(0x0f000000+(int)(Math.random()*(16777216)));
+        editText.setBackgroundColor(0x0f000000+(int)(Math.random()*(0xffffff)));
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -87,13 +87,15 @@ public class MainActivity extends AppCompatActivity {
             super(itemView);
             mTextView = itemView.findViewById(R.id.text);
             itemView.setOnClickListener(this);
-            itemView.setBackgroundColor( 0x1f000000+(int)(Math.random()*(16777216)));
+            itemView.setBackgroundColor( 0x1f000000+(int)(Math.random()*(0xffffff)));
         }
 
         public void bind(String text){mTextView.setText(text);}
         @Override
         public void onClick(View v) {
-            itemView.setBackgroundColor( 0x3fff0000+(int)(Math.random()*(65536)));
+            itemView.setBackgroundColor( 0x3fff0000+(int)(Math.random()*(0xffff)));
+//            如果一开始的话RecyclerView所有的View的背景都是白色，那么点击使背景色改变后，需要1秒后在
+//            后台改回去。但是现在的方法是所有的View的背景都是随机的，那么就不用改回来了
 //            Handler handler = new Handler();
 //            handler.postDelayed(new Runnable() {
 //                @Override
@@ -133,10 +135,5 @@ public class MainActivity extends AppCompatActivity {
             mItems.addAll(items);
             notifyDataSetChanged();
         }
-    }
-
-    void changeColor(View view)
-    {
-        view.setBackgroundColor( 0xffffffff);
     }
 }
