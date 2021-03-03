@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+//import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         searchAdapter.notifyItems(allEntries);
 
         EditText editText = findViewById(R.id.edittext);
+        editText.setBackgroundColor(0x0f000000+(int)(Math.random()*(16777216)));
         Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -84,11 +87,20 @@ public class MainActivity extends AppCompatActivity {
             super(itemView);
             mTextView = itemView.findViewById(R.id.text);
             itemView.setOnClickListener(this);
+            itemView.setBackgroundColor( 0x1f000000+(int)(Math.random()*(16777216)));
         }
 
         public void bind(String text){mTextView.setText(text);}
         @Override
         public void onClick(View v) {
+            itemView.setBackgroundColor( 0x3fff0000+(int)(Math.random()*(65536)));
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    itemView.setBackgroundColor( 0xffffffff);
+//                }
+//            }, 1000);
             Intent intent = new Intent(v.getContext(), DisplayActivity.class);
             intent.putExtra("extra",mTextView.getText().toString());
             v.getContext().startActivity(intent);
@@ -121,5 +133,10 @@ public class MainActivity extends AppCompatActivity {
             mItems.addAll(items);
             notifyDataSetChanged();
         }
+    }
+
+    void changeColor(View view)
+    {
+        view.setBackgroundColor( 0xffffffff);
     }
 }
