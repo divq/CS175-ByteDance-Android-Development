@@ -2,7 +2,7 @@
 
 ***
 
-## Homework1
+## Homework-Chapter2
 
 ### 作业要求
 
@@ -12,7 +12,7 @@
 
 ### 应用实际操作录屏
 
-见`homework1演示视频.webm`
+见`Homework-Chapter2/homework-chapter2演示视频.webm`
 
 ### 我实现的功能
 
