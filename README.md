@@ -50,3 +50,19 @@ RecyclerView：已实现
 
 ***
 
+## Homework-Chapter3
+
+### 作业要求
+
+在skeleton代码的TO-DO里面已经指定。
+
+### 我实现的功能
+
+完成了所有的指定任务。
+
+### 应用实际操作录屏
+
+见`Homework-Chapter3/homework-chapter3演示视频.webm`
+
+
+

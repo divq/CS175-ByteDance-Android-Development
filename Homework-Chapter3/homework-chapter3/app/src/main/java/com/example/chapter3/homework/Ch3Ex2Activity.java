@@ -2,12 +2,15 @@ package com.example.chapter3.homework;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -138,12 +141,26 @@ public class Ch3Ex2Activity extends AppCompatActivity {
         animator1.setRepeatMode(ObjectAnimator.REVERSE);
 
         // TODO ex2-1：在这里实现另一个 ObjectAnimator，对 target 控件的大小进行缩放，从 1 到 2 循环
-
+        ObjectAnimator scaleAnimatorX = ObjectAnimator.ofFloat(target,"scaleX",1f,2f);
+        ObjectAnimator scaleAnimatorY = ObjectAnimator.ofFloat(target,"scaleY",1f,2f);
+        scaleAnimatorX.setDuration(Integer.parseInt(durationSelector.getText().toString()));
+        scaleAnimatorX.setRepeatCount(ObjectAnimator.INFINITE);
+        scaleAnimatorX.setRepeatMode(ObjectAnimator.REVERSE);
+        scaleAnimatorY.setDuration(Integer.parseInt(durationSelector.getText().toString()));
+        scaleAnimatorY.setRepeatCount(ObjectAnimator.INFINITE);
+        scaleAnimatorY.setRepeatMode(ObjectAnimator.REVERSE);
         // TODO ex2-2：在这里实现另一个 ObjectAnimator，对 target 控件的透明度进行修改，从 1 到 0.5f 循环
+        ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(target,"alpha",1,0.5f);
+        alphaAnimator.setRepeatMode(ValueAnimator.REVERSE);
+        alphaAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        alphaAnimator.setDuration(Integer.parseInt(durationSelector.getText().toString()));
 
         // TODO ex2-3: 将上面创建的其他 ObjectAnimator 都添加到 AnimatorSet 中
         animatorSet = new AnimatorSet();
-        animatorSet.playTogether(animator1);
+        animatorSet.playTogether(animator1, scaleAnimatorX,scaleAnimatorY,alphaAnimator);
         animatorSet.start();
+
+        RainbowTextView rainbowTextView = findViewById(R.id.rainbow);
+        rainbowTextView.setVisibility(View.VISIBLE);
     }
 }
