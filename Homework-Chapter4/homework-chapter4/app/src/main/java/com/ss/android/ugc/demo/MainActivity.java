@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        //TODO 时钟页面
-//        mClockTv = findViewById(R.id.clock);
-//        mClockTv.setOnClickListener(new View.OnClickListener() {
-//            @Override public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, ClockActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        //TODO 时钟页面
+        mClockTv = findViewById(R.id.clock);
+        mClockTv.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ClockActivity.class);
+                startActivity(intent);
+            }
+        });
         mText = findViewById(R.id.text);
         //Demo 1: Handler
 //        new DownloadThread("http://www.xxx.mp4").start();
