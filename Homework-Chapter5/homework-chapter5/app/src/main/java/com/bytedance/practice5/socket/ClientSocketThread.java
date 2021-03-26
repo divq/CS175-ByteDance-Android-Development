@@ -23,5 +23,19 @@ public class ClientSocketThread extends Thread {
     public void run() {
         // TODO 6 用socket实现简单的HEAD请求（发送content）
         //  将返回结果用callback.onresponse(result)进行展示
+        try{
+            byte[] data = new byte[1024];
+            Socket socket = new Socket("www.sjtu.edu.cn",80);
+            BufferedOutputStream os = new BufferedOutputStream(socket.getOutputStream());
+            BufferedInputStream is = new BufferedInputStream(socket.getInputStream());
+            os.write(content.getBytes());
+            os.flush();
+            int receiveLen = is.read(data);
+            String result = new String(data, 0, receiveLen);
+            callback.onResponse(result);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+
     }
 }
