@@ -1294,6 +1294,7 @@ layout abc_tooltip
 layout activity_debug
 layout activity_main
 layout activity_note
+layout activity_note_modifier
 layout content_main
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog

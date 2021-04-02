@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/air/CS175-ByteDance-Android-Development/Homework-Chapter6/homework-chapter6/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ar/values-ar.xml",
+            "outputFile": "/Users/air/Developer/CS175-ByteDance-Android-Development/Homework-Chapter6/homework-chapter6/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ar/values-ar.xml",
             "map": [
                 {
                     "source": "/Users/air/.gradle/caches/transforms-2/files-2.1/0fa1eeea4eeac36cfff48fbc183671f4/res/values-ar/values-ar.xml",

@@ -2,7 +2,9 @@ package com.byted.camp.todolist;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -39,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
     private TodoDbHelper dbHelper;
     private SQLiteDatabase database;
+
+    private int number;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +96,17 @@ public class MainActivity extends AppCompatActivity {
         database = null;
         dbHelper.close();
         dbHelper = null;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sharedPreferences = getSharedPreferences("AppName", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        number = sharedPreferences.getInt("number",0);
+        setTitle("todolist" + number);
+        editor.putInt("number", number + 1);
+        editor.apply();
     }
 
     @Override
@@ -176,7 +193,9 @@ public class MainActivity extends AppCompatActivity {
         }
         ContentValues values = new ContentValues();
         values.put(TodoNote.COLUMN_STATE, note.getState().intValue);
-
+        values.put(TodoNote.COLUMN_CONTENT, note.getContent());
+        values.put(TodoNote.COLUMN_PRIORITY, note.getPriority().intValue);
+        values.put(TodoNote.COLUMN_DATE, note.getDate().getTime());
         int rows = database.update(TodoNote.TABLE_NAME, values,
                 TodoNote._ID + "=?",
                 new String[]{String.valueOf(note.id)});
