@@ -95,6 +95,8 @@ public class SystemCameraActivity extends AppCompatActivity {
 
     private void takePhotoHasPermission() {
         // todo
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CODE_TAKE_PHOTO);
     }
 
     @Override
@@ -127,8 +129,24 @@ public class SystemCameraActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_TAKE_PHOTO && resultCode == RESULT_OK) {
             // todo
+            Bundle extras = data.getExtras();
+            Bitmap bitmap = (Bitmap) extras.get("data");
+            imageView.setImageBitmap(bitmap);
         } else if (requestCode == REQUEST_CODE_TAKE_PHOTO_PATH && resultCode == RESULT_OK) {
             // todo
+            int targetWidth = imageView.getWidth();
+            int targetHeight = imageView.getHeight();
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(takeImagePath, options);
+            int photoWidth = options.outWidth;
+            int photoHeight = options.outHeight;
+            int scaleFactor = Math.min(photoWidth / targetWidth, photoHeight / targetHeight);
+            options.inJustDecodeBounds = false;
+            options.inSampleSize = scaleFactor;
+            Bitmap bitmap = BitmapFactory.decodeFile(takeImagePath, options);
+            Bitmap rotateBitmap = PathUtils.rotateImage(bitmap,takeImagePath);
+            imageView.setImageBitmap(rotateBitmap);
         }
     }
 

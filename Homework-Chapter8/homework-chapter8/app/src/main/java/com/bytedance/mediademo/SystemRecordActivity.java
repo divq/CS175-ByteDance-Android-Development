@@ -70,6 +70,7 @@ public class SystemRecordActivity extends AppCompatActivity {
         intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,1);
         if (intent.resolveActivity(getPackageManager()) != null) {
             // todo
+            startActivityForResult(intent,REQUEST_CODE_RECORD);
         }
     }
 
@@ -104,6 +105,9 @@ public class SystemRecordActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // todo
+        if(requestCode == REQUEST_CODE_RECORD && resultCode == RESULT_OK){
+            play();
+        }
     }
 
     private void play() {

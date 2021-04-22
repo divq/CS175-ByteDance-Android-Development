@@ -77,6 +77,8 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
 
         // Step 2: Set sources
         // todo
+        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
+        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
         // Step 3: Set a CamcorderProfile (requires API Level 8 or higher)
         mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
@@ -104,6 +106,12 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
 
     private void releaseMediaRecorder() {
         // todo
+        if (mMediaRecorder != null) {
+            mMediaRecorder.reset();   
+            mMediaRecorder.release(); 
+            mMediaRecorder = null;
+            mCamera.lock();    
+        }    
     }
 
     private String getOutputMediaPath() {
@@ -187,6 +195,12 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         // todo
+        try {
+            mCamera.setPreviewDisplay(holder);
+            mCamera.startPreview();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -208,6 +222,9 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         // todo
+        mCamera.stopPreview();
+        mCamera.release();
+        mCamera = null;
     }
 
     @Override
